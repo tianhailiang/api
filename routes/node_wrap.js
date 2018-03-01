@@ -285,10 +285,10 @@ exports.input_upload = function (req, res, next) {
                             res.send(err);
                         }else{
                             res.end(JSON.stringify(returnData));
-                            setTimeout(function () {
+                           /* setTimeout(function () {
                                 log.info('删除的本地文件', files[fileType][0].path);
                                 fs.unlinkSync(files[fileType][0].path);
-                            },30000)
+                            },30000)*/
                         }
                     })
                 }
