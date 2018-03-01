@@ -298,7 +298,7 @@ exports.input_upload = function (req, res, next) {
                         if(err){
                             res.send(err);
                         }else{
-                            console.log('上传二维码返回值',result)
+                            console.log('上传二维码返回值',result, typeof result)
                             res.end(JSON.stringify(returnData));
                             /*setTimeout(function () {
                                 log.info('删除的本地文件', files[fileType][0].path);
