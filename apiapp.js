@@ -10,7 +10,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+app.use('/upload', express.static(path.join(__dirname, 'upload')));
 /*开发环境 ajax允许跨域*/
 if (config.version == 'development') {
     app.all('*', function(req, res, next) {
