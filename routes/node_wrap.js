@@ -277,6 +277,7 @@ exports.input_upload = function (req, res, next) {
                 if (fileType == 'upload') {
                     returnData = {"errno":0,"data":[returnImg]};
                     res.end(JSON.stringify(returnData));
+                    fs.unlinkSync(files[fileType][0].path);
                 }
                 else if (fileType == 'avatar') {
                     returnData = {"errno":0,"localpath":files[fileType][0].path};
@@ -285,10 +286,10 @@ exports.input_upload = function (req, res, next) {
                             res.send(err);
                         }else{
                             res.end(JSON.stringify(returnData));
-                           /* setTimeout(function () {
+                            setTimeout(function () {
                                 log.info('删除的本地文件', files[fileType][0].path);
                                 fs.unlinkSync(files[fileType][0].path);
-                            },30000)*/
+                            },30000)
                         }
                     })
                 }
@@ -300,10 +301,7 @@ exports.input_upload = function (req, res, next) {
                         }else{
                             console.log('上传二维码返回值',result, typeof result)
                             res.end(JSON.stringify(returnData));
-                            /*setTimeout(function () {
-                                log.info('删除的本地文件', files[fileType][0].path);
-                                fs.unlinkSync(files[fileType][0].path);
-                            },30000)*/
+                            fs.unlinkSync(files[fileType][0].path);
                         }
                     })
                 }
@@ -314,6 +312,7 @@ exports.input_upload = function (req, res, next) {
                             res.send(err);
                         }else{
                             res.end(JSON.stringify(returnData));
+                            fs.unlinkSync(files[fileType][0].path);
                         }
                     })
                 }
@@ -322,10 +321,6 @@ exports.input_upload = function (req, res, next) {
                 var returnData = {"code":1,'message':'您今日操作过于频繁请重试'};
                 res.end(JSON.stringify(returnData));
             }
-            setTimeout(function () {
-                log.info('删除的本地文件', files[fileType][0].path);
-                fs.unlinkSync(files[fileType][0].path);
-            },30000)
         });
     });
 };
