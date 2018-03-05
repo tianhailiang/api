@@ -1578,7 +1578,7 @@ exports.detail_count = function (data, callback) {
             redisPool.incr(data.uuid+"_"+data.catid+"_"+data.id+"_viewnum", function(){});
             update_viewnum(data.catid, data.id, data.uuid, callback);
             }else{
-              var viewNumKey = "WEB:HITS:cat_"+data.catid+"_"+data.id;
+              var viewNumKey = "WEB:HITS:cat_"+data.id;
               redisPool.get(viewNumKey, function(err, reply){
                 if(reply){
                   callback(null, {"uuid":data.uuid, "num":reply});
