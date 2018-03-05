@@ -1603,15 +1603,15 @@ exports.detail_count = function (data, callback) {
 
 
 function update_viewnum(catid, id, uuid, callback){
-  var viewNumKey = "WEB:HITS:cat_"+catid+"_"+id;
+  var viewNumKey = "WEB:HITS:cat_"+id;
   redisPool.incr(viewNumKey, function(err, reply){
     if(err){
-      log.error("view num "+data.catid+" : "+data.id, err);
+      log.error("view num "+" : "+data.id, err);
     }else{
       var redisHits =  redis.createClient(config.redisCache.port, config.redisCache.host);
       redisHits.select('6', function(error){
         var viewListKey = "view_set";
-        redisHits.sadd(viewListKey, catid+"_"+id);
+        redisHits.sadd(viewListKey, id);
       });
       if(callback){
         callback(null, {"uuid":uuid, "num":reply});
