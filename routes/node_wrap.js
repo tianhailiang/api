@@ -209,6 +209,7 @@ exports.input_upload = function (req, res, next) {
     var fileType = '';
     var avatar_uid = '';
     var originPath = '';
+    var newVersion = '';
     form.parse(req, function(err, fields, files) {
         Object.keys(fields).forEach(function(name) {
             if (name == 'uid') {
@@ -239,7 +240,8 @@ exports.input_upload = function (req, res, next) {
                 var dir2 = uid.substr(3, 2);
                 var dir3 = uid.substr(5, 2);
                 var size = 'small';
-                remotePath = '/avatar/' + dir1+'/'+dir2+'/'+dir3+'/'+uid.substr(-2)+'_avatar_'+size+'.jpg';//+afterfix;
+                newVersion = new Date().getTime();
+                remotePath = '/avatar/' + dir1+'/'+dir2+'/'+dir3+'/'+uid.substr(-2)+'_avatar_'+size+ '_' + newVersion +'.jpg';//+afterfix;
             }
             log.info('remotePath', remotePath);
             return remotePath;
@@ -280,16 +282,13 @@ exports.input_upload = function (req, res, next) {
                     fs.unlinkSync(files[fileType][0].path);
                 }
                 else if (fileType == 'avatar') {
-                    returnData = {"errno":0,"localpath":files[fileType][0].path};
-                    cms.user_edit_avatar({uid:avatar_uid},function(err,result){
+                    returnData = {"errno":0,"data":[returnImg]};
+                    cms.edit_user_version({uid:avatar_uid,version:newVersion},function(err,result){
                         if(err){
                             res.send(err);
                         }else{
                             res.end(JSON.stringify(returnData));
-                            /*setTimeout(function () {
-                                log.info('删除的本地文件', files[fileType][0].path);
-                                fs.unlinkSync(files[fileType][0].path);
-                            },30000)*/
+                            fs.unlinkSync(files[fileType][0].path);
                         }
                     })
                 }

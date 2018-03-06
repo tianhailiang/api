@@ -1736,6 +1736,16 @@ exports.user_edit_avatar = function(data,callback){
   }
   api.apiRequest(url, callback);
 };
+//edit_user_version
+exports.edit_user_version = function(data,callback){
+  var url = config.apis.edit_user_version;
+  console.log('edit_user_version URL~~ ', url);
+  if (url == null){
+    callback('404');
+    return;
+  }
+  api.apiRequest_post(url ,data ,callback);
+};
 //load_more_article
 exports.load_more_article = function (data,callback) {
   var url = _api_path_url_shequ(data, config.apis.get_so_article_list);

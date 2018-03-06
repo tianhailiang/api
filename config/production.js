@@ -294,6 +294,8 @@ var apis = {
   "sign_up_way": prefix + 'sign_up_way',
   //user_edit_avatar
   "user_edit_avatar": prefix + 'user_edit_avatar',
+  //edit_user_version
+  "edit_user_version": shequ_prefix + 'account/edit_user_version/',
   //post_code
   "post_code": shequ_prefix + 'account/upload_qrcode/',
   //get_so_article_list
