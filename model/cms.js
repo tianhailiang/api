@@ -1550,9 +1550,9 @@ var redisPool = require('redis-connection-pool')('viewNumberCache', {
 * */
 exports.detail_count = function (data, callback) {
   //redis 缓存文章浏览数````·
-  //判断用户访问是否在限制条件内 10min 5 
+  //判断用户访问是否在限制条件内 10min 5
   var condition_time = 60;
-  var condition_num = 5;
+  var condition_num = 1;
   if(!data.uuid){
     var UUID = require('uuid');
     var uuidstr = UUID.v1();
