@@ -219,7 +219,7 @@ exports.input_upload = function (req, res, next) {
         Object.keys(files).forEach(function(name) {
             fileType = name;
         });
-
+        console.log('fileType',fileType)
         //生成上传路径和上传文件
         function creatUploadPah (f,type,userid) { //入参是传过来的文件
             var date = new Date();
@@ -243,36 +243,23 @@ exports.input_upload = function (req, res, next) {
                 newVersion = new Date().getTime();
                 remotePath = '/avatar/' + dir1+'/'+dir2+'/'+dir3+'/'+uid.substr(-2)+'_avatar_'+size+ '_' + newVersion +'.jpg';//+afterfix;
             }
-            log.info('remotePath', remotePath);
+            else if (type=='attachment') {
+                var attachAfterfix = f[type][0].path.split('.')[1];
+                remotePath = '/feedback/'+ userid + '/' + Y +'/' + M + D + '/' + Y + M + D + h + m + s + '.' + attachAfterfix;
+                console.log('attachment remotePath',afterfix);
+            }
+            //log.info('remotePath', remotePath);
             return remotePath;
         }
         originPath = creatUploadPah(files,fileType,avatar_uid);
         client.putFile(originPath,fs.ReadStream(files[fileType][0].path)).then(function (content) {
             log.info('本地文件',files[fileType][0].path)
-/*            var returnImg = 'http://images.jjl.cn' + originPath;
-            var returnData;
-            if (fileType == 'upload') {
-                returnData = {"errno":0,"data":[returnImg]};
-                res.end(JSON.stringify(returnData));
-            }
-            else if (fileType == 'avatar') {
-
-                cms.user_edit_avatar({uid:avatar_uid},function(err,result){
-                    if(err){
-                        res.send(err);
-                    }else{
-                        res.send(result);
-                    }
-                })
-            }*/
             return 0;
         },function (err) {
-            /*var returnData = {"code":1,'message':'您今日操作过于频繁请重试'};
-            res.end(JSON.stringify(returnData));*/
             console.log('err',err)
             return 1;
         }).then(function (resolve) {
-            console.log('resolve',resolve);
+            console.log('resolve resolve',resolve);
             var returnData;
             if (resolve == 0) {
                 var returnImg = 'http://images.jjl.cn' + originPath;
@@ -314,6 +301,11 @@ exports.input_upload = function (req, res, next) {
                             fs.unlinkSync(files[fileType][0].path);
                         }
                     })
+                }
+                else if (fileType == 'attachment') {
+                    returnData = {"errno":0,"data":[returnImg]};
+                    res.end(JSON.stringify(returnData));
+                    fs.unlinkSync(files[fileType][0].path);
                 }
             }
             else if (resolve == 1) {
