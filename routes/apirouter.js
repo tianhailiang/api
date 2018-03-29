@@ -34,4 +34,6 @@ exports = module.exports = function (app) {// routes
     app.get('/cmsapi/load_more_article',node_wrap.load_more_article);
     //获取城市code码 接口
     app.get('/ip_geter',node_wrap.ip_geter);
+    //文章置顶接口
+    app.post('/article_top', node_wrap.article_top);
 };

@@ -1773,4 +1773,13 @@ exports.ip_geter =function(data,callback){
     return;
   }
   api.apiRequest(url ,callback);
-}
+};
+//article_top
+exports.article_top = function(data,callback){
+  var url = config.apis.article_top;
+  if (url == null){
+    callback('404');
+    return;
+  }
+  api.apiRequest_post(url ,data ,callback);
+};

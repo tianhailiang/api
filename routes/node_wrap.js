@@ -356,4 +356,15 @@ exports.ip_geter= function(req, res, next){
             res.send(result);
         }   
     })
-}
+};
+//article_top
+exports.article_top = function (req, res, next) {
+    data = req.body;
+    cms.article_top(data,function(err,result){
+        if(err){
+            res.send(err);
+        }else{
+            res.send(result);
+        }
+    })
+};
