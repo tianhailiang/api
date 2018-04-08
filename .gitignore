@@ -12,3 +12,4 @@ logs/*
 nohup.out
 package-lock.json
 dist
+config/interface_config.js

@@ -3,21 +3,21 @@
  * @type {{host: string, port: number}}
  */
 'use strict';
-
+var apiconfig = require('../config/interface_config');
 const redisCache = {
   "host": "jjl-redis.3p6fml.0001.cnn1.cache.amazonaws.com.cn",
   "port": 6379
 };
 
-var wwhost = 'http://www2.jjlvip.cn';
+/*var wwhost = 'http://www2.jjlvip.cn';
 var yiminhostname = 'yimin.jjlvip.cn';
 var cdnhost = 'http://www2.jjl.cn:3000';
-var imageshost = 'http://images.jjl.cn';
-var ucwaihost = 'http://api.jjlvip.cn/uc';
-var uchost = 'http://internal-jjl-elb-api-1494687011.cn-north-1.elb.amazonaws.com.cn/uc';
-var prefix = 'http://internal-jjl-elb-api-1494687011.cn-north-1.elb.amazonaws.com.cn/cms/api/';//'http://cmsapi.jjlvip.cn/api/';
-var uc_prefix = 'http://internal-jjl-elb-api-1494687011.cn-north-1.elb.amazonaws.com.cn/uc/api/';
-var shequ_prefix = 'http://internal-jjl-elb-api-1494687011.cn-north-1.elb.amazonaws.com.cn/so/?/api/';//http://soapi.jjlvip.cn/?/api/';
+var imageshost = 'http://images.jjl.cn';*/
+//var ucwaihost = 'http://api.jjlvip.cn/uc';
+//var uchost = 'http://internal-jjl-elb-api-1494687011.cn-north-1.elb.amazonaws.com.cn/uc';
+var prefix =  apiconfig.prefix;
+var uc_prefix = apiconfig.uc_prefix;
+var shequ_prefix = apiconfig.shequ_prefix;
 var apis = {
   "oauth": uc_prefix + 'index.php',
   "bind_phone": uc_prefix + 'index.php?m=bind_phone',// 绑定手机号
@@ -307,12 +307,8 @@ var apis = {
 };
 module.exports = {
   redisCache: redisCache,
-  apis : apis,
-  wwhost: wwhost,
-  cdnhost: cdnhost,
-  uchost: uchost,
-  yiminhostname: yiminhostname,
-  ucwaihost: ucwaihost,
-  uc_prefix: uc_prefix,
-  imageshost: imageshost
+  apis : apis
+  //uchost: uchost,
+  //ucwaihost: ucwaihost,
+  //uc_prefix: uc_prefix
 };
