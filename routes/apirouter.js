@@ -9,7 +9,7 @@ exports = module.exports = function (app) {// routes
     //关注用户接口
     app.post("/soapi/follow_people",node_wrap.follow_people);
     //浏览量接口
-    app.get('/cmsapi/article_count', node_wrap.article_count);
+    //app.get('/cmsapi/article_count', node_wrap.article_count);
     //token
     app.get('/token', node_wrap.check_token);
     /*node接口封装*/
