@@ -1684,12 +1684,29 @@ exports.zixunCount = function(data,callback){
 };
 //advert
 exports.advert = function(data,callback){
-  var url = _api_url_path(data, config.apis.advert);
-  if (url == null){
-    callback('404');
-    return;
-  }
-  api.apiRequest(url, callback);
+  var redisPool = require('redis-connection-pool')('pageAdvertCache', {
+    host: config.redisCache.host,
+    port: config.redisCache.port || 6379,
+    max_clients: config.redisCache.max || 30,
+    perform_checks: false,
+    database: 7 // database number to use
+  });
+  redisPool.get('WEB:ADVERT:'+ data.cityid+'_'+data.ad_page,function (err, reply){
+    if (reply) {
+      console.log('if')
+      var res = JSON.parse(reply);
+      callback(null, res);
+    }
+    else {
+      console.log('else')
+      var url = _api_url_path(data, config.apis.advert);
+      if (url == null){
+        callback('404');
+        return;
+      }
+      api.apiRequest(url, callback);
+    }
+  });
 };
 //immi_poster
 exports.immi_poster = function(data,callback){
