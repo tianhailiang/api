@@ -1693,12 +1693,10 @@ exports.advert = function(data,callback){
   });
   redisPool.get('WEB:ADVERT:'+ data.cityid+'_'+data.ad_page,function (err, reply){
     if (reply) {
-      console.log('if')
       var res = JSON.parse(reply);
       callback(null, res);
     }
     else {
-      console.log('else')
       var url = _api_url_path(data, config.apis.advert);
       if (url == null){
         callback('404');
