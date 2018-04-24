@@ -1684,14 +1684,14 @@ exports.zixunCount = function(data,callback){
 };
 //advert
 exports.advert = function(data,callback){
-  var redisPool = require('redis-connection-pool')('pageAdvertCache', {
+  var adRedisPool = require('redis-connection-pool')('pageAdvertCache', {
     host: config.redisCache.host,
     port: config.redisCache.port || 6379,
     max_clients: config.redisCache.max || 30,
     perform_checks: false,
     database: 7 // database number to use
   });
-  redisPool.get('WEB:ADVERT:'+ data.cityid+'_'+data.ad_page,function (err, reply){
+  adRedisPool.get('WEB:ADVERT:'+ data.cityid+'_'+data.ad_page,function (err, reply){
     if (reply) {
       var res = JSON.parse(reply);
       callback(null, res);
