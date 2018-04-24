@@ -10,6 +10,7 @@ var upyun = require('upyun');
 var fs = require('fs');
 var multiparty = require('multiparty');
 var request = require('request');
+var get_area_code = require('./ip_poll');
 // 在线评估
 exports.assessment = function (req, res, next) {
     data = req.body;
@@ -378,14 +379,17 @@ exports.get_ip_geter= function(req, res, next){
     if(ip.split(',').length>0){
         ip = ip.split(',')[0]
     }
-    log.info(ip)
     // ip = '175.190.80.79'; //我的外网ip地址
-    // log.info(ip)
+    log.info(ip)
     request.get('http://api.map.baidu.com/location/ip?ip='+ip+'&ak=oTtUZr04m9vPgBZ1XOFzjmDpb7GCOhQw&coor=bd09ll',function (error, response, body){
         if(!error && response.statusCode == 200){
-            // log.info(body)
-            // log.info(typeof body)
-            res.send(body);
+            log.info(body)
+            var b =JSON.parse(body);
+            var cityCode ='1';
+            if(b.content){
+                cityCode = get_area_code(b.content.address_detail.city);
+            }
+            res.send(cityCode);
         }else{
             res.send(error);
         }
