@@ -36,4 +36,5 @@ exports = module.exports = function (app) {// routes
     app.get('/ip_geter',node_wrap.ip_geter);
     //ÎÄÕÂÖÃ¶¥½Ó¿Ú
     app.post('/article_top', node_wrap.article_top);
+    app.get('/get_ip_geter',node_wrap.get_ip_geter);
 };

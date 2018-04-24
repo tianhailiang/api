@@ -9,6 +9,7 @@ var tokenfunc = require('./token.js');
 var upyun = require('upyun');
 var fs = require('fs');
 var multiparty = require('multiparty');
+var request = require('request');
 // 在线评估
 exports.assessment = function (req, res, next) {
     data = req.body;
@@ -365,6 +366,28 @@ exports.article_top = function (req, res, next) {
             res.send(err);
         }else{
             res.send(result);
+        }
+    })
+};
+
+//ip 接口
+exports.get_ip_geter= function(req, res, next){
+    log.debug('根据百度ip获取城市')
+    var data = {};
+    var ip = req.headers['x-forwarded-for'] || req.ip || req.connection.remoteAddress || req.socket.remoteAddress || req.connection.socket.remoteAddress;
+    if(ip.split(',').length>0){
+        ip = ip.split(',')[0]
+    }
+    log.info(ip)
+    // ip = '175.190.80.79'; //我的外网ip地址
+    // log.info(ip)
+    request.get('http://api.map.baidu.com/location/ip?ip='+ip+'&ak=oTtUZr04m9vPgBZ1XOFzjmDpb7GCOhQw&coor=bd09ll',function (error, response, body){
+        if(!error && response.statusCode == 200){
+            // log.info(body)
+            // log.info(typeof body)
+            res.send(body);
+        }else{
+            res.send(error);
         }
     })
 };
