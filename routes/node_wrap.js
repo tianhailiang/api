@@ -13,7 +13,7 @@ var request = require('request');
 var get_area_code = require('./ip_poll');
 // 在线评估
 exports.assessment = function (req, res, next) {
-    data = req.body;
+    data = req.query;
     cms.assessment(data,function(err,result){
         if(err){
             res.send(err);
@@ -35,7 +35,7 @@ exports.online_booking = function (req, res, next) {
 };
 //onlineBooking
 exports.onlineBooking = function (req, res, next) {
-    data = req.body;
+    data = req.query;
     cms.onlineBooking(data,function(err,result){
         if(err){
             res.send(err);
@@ -57,7 +57,7 @@ exports.immi_activity_book = function (req, res, next) {
 };
 //immi_case_plan
 exports.immi_case_plan = function (req, res, next) {
-    data = req.body;
+    data = req.query;
     cms.immi_case_plan(data,function(err,result){
         if(err){
             res.send(err);
@@ -134,7 +134,7 @@ exports.immi_poster_click = function (req, res, next) {
 };
 //sign_up_away
 exports.sign_up_way = function (req, res, next) {
-    data = req.body;
+    data = req.query;
     cms.sign_up_way(data,function(err,result){
         if(err){
             res.send(err);

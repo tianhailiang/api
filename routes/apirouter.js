@@ -13,19 +13,19 @@ exports = module.exports = function (app) {// routes
     //token
     app.get('/token', node_wrap.check_token);
     /*node接口封装*/
-    app.post('/cmsapi/assessment', node_wrap.assessment);//在线评估
+    app.get('/cmsapi/assessment', node_wrap.assessment);//在线评估
     app.post('/cmsapi/online_booking', node_wrap.online_booking);//留学产品频道页在线预约
-    app.post('/cmsapi/onlineBooking', node_wrap.onlineBooking);//留学活动文章底页在线预约
+    app.get('/cmsapi/onlineBooking', node_wrap.onlineBooking);//留学活动文章底页在线预约
     app.post('/cmsapi/passageway', node_wrap.passageway);//留学快速申请通道
     app.post('/cmsapi/zixunCount', node_wrap.zixunCount);//留学乐语咨询
-    app.post('/cmsapi/sign_up_way', node_wrap.sign_up_way);//商务合作
+    app.get('/cmsapi/sign_up_way', node_wrap.sign_up_way);//商务合作
     app.get('/cmsapi/advert', node_wrap.advert);//留学广告
     app.get('/cmsapi/advert_clicknum', node_wrap.advert_clicknum);//留学广告计数
 
     app.get('/cmsapi/immi_poster', node_wrap.immi_poster);//移民广告
     app.get('/cmsapi/immi_poster_click', node_wrap.immi_poster_click);//移民广告计数
     app.post('/cmsapi/immi_activity_book', node_wrap.immi_activity_book);//移民活动预约
-    app.post('/cmsapi/immi_case_plan', node_wrap.immi_case_plan);//移民方案定制
+    app.get('/cmsapi/immi_case_plan', node_wrap.immi_case_plan);//移民方案定制
 
     //社区上传
     app.post('/cmsapi/input_upload',node_wrap.input_upload);//相册上传
