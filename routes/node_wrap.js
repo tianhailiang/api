@@ -245,10 +245,13 @@ exports.input_upload = function (req, res, next) {
                 newVersion = new Date().getTime();
                 remotePath = '/avatar/' + dir1+'/'+dir2+'/'+dir3+'/'+uid.substr(-2)+'_avatar_'+size+ '_' + newVersion +'.jpg';//+afterfix;
             }
-            else if (type=='attachment' || type == 'upload_opinion') {
+            else if (type=='attachment') {
                 var attachAfterfix = f[type][0].path.split('.')[1];
                 remotePath = '/feedback/'+ userid + '/' + Y +'/' + M + D + '/' + Y + M + D + h + m + s + '.' + attachAfterfix;
                 console.log('attachment remotePath',afterfix);
+            }
+            else if ( type == 'upload_opinion') {
+                remotePath = "/opinion/" + Y +'/' + M + D + '/' + Y + M + D + h + m + s + (Math.round(Math.random()*899 + 100)) + '.' + afterfix;
             }
             //log.info('remotePath', remotePath);
             return remotePath;
