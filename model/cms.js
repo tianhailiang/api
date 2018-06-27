@@ -1689,11 +1689,12 @@ exports.advert = function(data,callback){
     port: config.redisCache.port || 6379,
     max_clients: config.redisCache.max || 30,
     perform_checks: false,
-    database: 7 // database number to use
+    database: 8 // database number to use
   });
   adRedisPool.get('WEB:ADVERT:'+ data.cityid+'_'+data.ad_page,function (err, reply){
     if (reply) {
-      var res = JSON.parse(reply);
+      var resData = JSON.parse(reply);
+      var res = {'code':0,'message':'success','data':resData};
       callback(null, res);
     }
     else {
