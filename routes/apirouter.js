@@ -6,6 +6,7 @@ var node_wrap = require('./node_wrap.js');
 exports = module.exports = function (app) {// routes
     /*接口封装* */
     app.get('/ucapi/ucapi_agent', node_wrap.ucapi_agent);
+    app.post('/ucapi/ucapi_agent_post', node_wrap.ucapi_agent_post);
     //关注用户接口
     app.post("/soapi/follow_people",node_wrap.follow_people);
     //浏览量接口

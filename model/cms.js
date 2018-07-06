@@ -1487,7 +1487,15 @@ exports.ucapi_agent = function(data,callback){
   }
   api.apiRequest(url, callback);
 }
-
+//接口代理封装post
+exports.ucapi_agent_post = function(data,callback){
+  var url = config.apis.get_ucapi_agent_post;
+  if (url == null){
+    callback('404');
+    return;
+  }
+  api.apiRequest_post(url ,data ,callback);
+}
 /**
  * 第三方登录接口调用封装
  * @param data

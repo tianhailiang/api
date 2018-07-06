@@ -202,6 +202,19 @@ exports.ucapi_agent = function(req,res,next){
         }
     })
 };
+/*
+ * 接口代理封装post
+ * */
+exports.ucapi_agent_post = function(req,res,next){
+    var data = req.body;
+    cms.ucapi_agent_post(data,function(err,result){
+        if(err){
+            res.send(err);
+        }else{
+            res.send(result);
+        }
+    })
+};
 //input_upload
 exports.input_upload = function (req, res, next) {
     var form = new multiparty.Form();
