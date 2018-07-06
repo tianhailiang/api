@@ -206,7 +206,7 @@ exports.ucapi_agent = function(req,res,next){
  * 接口代理封装post
  * */
 exports.ucapi_agent_post = function(req,res,next){
-    var data = req.body;
+    var data = req.query;
     cms.ucapi_agent_post(data,function(err,result){
         if(err){
             res.send(err);

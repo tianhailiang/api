@@ -4,38 +4,38 @@
 var node_wrap = require('./node_wrap.js');
 
 exports = module.exports = function (app) {// routes
-    /*½Ó¿Ú·â×°* */
+    /*ï¿½Ó¿Ú·ï¿½×°* */
     app.get('/ucapi/ucapi_agent', node_wrap.ucapi_agent);
-    app.post('/ucapi/ucapi_agent_post', node_wrap.ucapi_agent_post);
-    //¹Ø×¢ÓÃ»§½Ó¿Ú
+    app.get('/ucapi/ucapi_agent_post', node_wrap.ucapi_agent_post);
+    //ï¿½ï¿½×¢ï¿½Ã»ï¿½ï¿½Ó¿ï¿½
     app.post("/soapi/follow_people",node_wrap.follow_people);
-    //ä¯ÀÀÁ¿½Ó¿Ú
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½
     //app.get('/cmsapi/article_count', node_wrap.article_count);
     //token
     app.get('/token', node_wrap.check_token);
-    /*node½Ó¿Ú·â×°*/
-    app.get('/cmsapi/assessment', node_wrap.assessment);//ÔÚÏßÆÀ¹À
-    app.post('/cmsapi/online_booking', node_wrap.online_booking);//ÁôÑ§²úÆ·ÆµµÀÒ³ÔÚÏßÔ¤Ô¼
-    app.get('/cmsapi/onlineBooking', node_wrap.onlineBooking);//ÁôÑ§»î¶¯ÎÄÕÂµ×Ò³ÔÚÏßÔ¤Ô¼
-    app.post('/cmsapi/passageway', node_wrap.passageway);//ÁôÑ§¿ìËÙÉêÇëÍ¨µÀ
-    app.post('/cmsapi/zixunCount', node_wrap.zixunCount);//ÁôÑ§ÀÖÓï×ÉÑ¯
-    app.get('/cmsapi/sign_up_way', node_wrap.sign_up_way);//ÉÌÎñºÏ×÷
-    app.get('/cmsapi/advert', node_wrap.advert);//ÁôÑ§¹ã¸æ
-    app.get('/cmsapi/advert_clicknum', node_wrap.advert_clicknum);//ÁôÑ§¹ã¸æ¼ÆÊý
+    /*nodeï¿½Ó¿Ú·ï¿½×°*/
+    app.get('/cmsapi/assessment', node_wrap.assessment);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    app.post('/cmsapi/online_booking', node_wrap.online_booking);//ï¿½ï¿½Ñ§ï¿½ï¿½Æ·Æµï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½Ô¤Ô¼
+    app.get('/cmsapi/onlineBooking', node_wrap.onlineBooking);//ï¿½ï¿½Ñ§ï¿½î¶¯ï¿½ï¿½ï¿½Âµï¿½Ò³ï¿½ï¿½ï¿½ï¿½Ô¤Ô¼
+    app.post('/cmsapi/passageway', node_wrap.passageway);//ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½
+    app.post('/cmsapi/zixunCount', node_wrap.zixunCount);//ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯
+    app.get('/cmsapi/sign_up_way', node_wrap.sign_up_way);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    app.get('/cmsapi/advert', node_wrap.advert);//ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½
+    app.get('/cmsapi/advert_clicknum', node_wrap.advert_clicknum);//ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    app.get('/cmsapi/immi_poster', node_wrap.immi_poster);//ÒÆÃñ¹ã¸æ
-    app.get('/cmsapi/immi_poster_click', node_wrap.immi_poster_click);//ÒÆÃñ¹ã¸æ¼ÆÊý
-    app.post('/cmsapi/immi_activity_book', node_wrap.immi_activity_book);//ÒÆÃñ»î¶¯Ô¤Ô¼
-    app.get('/cmsapi/immi_case_plan', node_wrap.immi_case_plan);//ÒÆÃñ·½°¸¶¨ÖÆ
+    app.get('/cmsapi/immi_poster', node_wrap.immi_poster);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    app.get('/cmsapi/immi_poster_click', node_wrap.immi_poster_click);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    app.post('/cmsapi/immi_activity_book', node_wrap.immi_activity_book);//ï¿½ï¿½ï¿½ï¿½î¶¯Ô¤Ô¼
+    app.get('/cmsapi/immi_case_plan', node_wrap.immi_case_plan);//ï¿½ï¿½ï¿½ñ·½°ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    //ÉçÇøÉÏ´«
-    app.post('/cmsapi/input_upload',node_wrap.input_upload);//Ïà²áÉÏ´«
-    app.get('/cmsapi/user_edit_avatar',node_wrap.user_edit_avatar);//ÐÞ¸ÄÆÕÍ¨ÓÃ»§Í·Ïñ
-    //ËÑË÷ÎÄÕÂ¼ÓÔØ¸ü¶à
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½
+    app.post('/cmsapi/input_upload',node_wrap.input_upload);//ï¿½ï¿½ï¿½ï¿½Ï´ï¿½
+    app.get('/cmsapi/user_edit_avatar',node_wrap.user_edit_avatar);//ï¿½Þ¸ï¿½ï¿½ï¿½Í¨ï¿½Ã»ï¿½Í·ï¿½ï¿½
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½
     app.get('/cmsapi/load_more_article',node_wrap.load_more_article);
-    //»ñÈ¡³ÇÊÐcodeÂë ½Ó¿Ú
+    //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½codeï¿½ï¿½ ï¿½Ó¿ï¿½
     app.get('/ip_geter',node_wrap.ip_geter);
-    //ÎÄÕÂÖÃ¶¥½Ó¿Ú
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½Ó¿ï¿½
     app.post('/article_top', node_wrap.article_top);
     app.get('/get_ip_geter',node_wrap.get_ip_geter);
 };
