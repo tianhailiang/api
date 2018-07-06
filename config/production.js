@@ -253,6 +253,8 @@ var apis = {
     "get_lunbo_list1": prefix + 'immi_poster',
   //接口封装
   "get_ucapi_agent": uc_prefix + 'index.php',
+  //注册接口post
+  "get_ucapi_agent_post": uc_prefix + 'index.php?m=user_check_reg',
   //文章详情
   "get_article":shequ_prefix + 'article/',
   //获取用户信息（普通用户，顾问，参赞）
