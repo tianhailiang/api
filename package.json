@@ -69,7 +69,7 @@
     "pm2": "pm2 start processes.json --env production",
     "pm2_fragsvr": "pm2 start fragsvr.json --env production",
     "pm2_apisvr": "pm2 start apisvr.json --env production",
-    "start": "set NODE_ENV=production&&node ./bin/www",
+    "start": "set NODE_ENV=production&&node ./bin/apisvr",
     "dev": "set NODE_ENV=development&&node ./bin/www",
     "frag_dev": "set NODE_ENV=development&&node ./bin/fragsvr",
     "api_dev": "set NODE_ENV=development&&node ./bin/apisvr",
