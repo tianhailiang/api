@@ -249,6 +249,9 @@ exports.input_upload = function (req, res, next) {
             if (type=='upload'|| type == 'weixincode' || type == 'qqcode') {
                 remotePath = "/ugc/" + Y +'/' + M + D + '/' + Y + M + D + h + m + s + (Math.round(Math.random()*899 + 100)) + '.' + afterfix;
             }
+            else if (type == 'yimin_upload') {
+                remotePath = "/yimin_ugc/" + Y +'/' + M + D + '/' + Y + M + D + h + m + s + (Math.round(Math.random()*899 + 100)) + '.' + afterfix;
+            }
             else if (type=='avatar') {
                 uid = (Array(9).join('0') + userid).slice(-9);
                 var dir1 = uid.substr(0, 3);
