@@ -269,7 +269,7 @@ exports.input_upload = function (req, res, next) {
             else if ( type == 'upload_opinion') {
                 remotePath = "/opinion/" + Y +'/' + M + D + '/' + Y + M + D + h + m + s + (Math.round(Math.random()*899 + 100)) + '.' + afterfix;
             }
-            //log.info('remotePath', remotePath);
+            // log.info('remotePath', remotePath);
             return remotePath;
         }
         originPath = creatUploadPah(files,fileType,avatar_uid);
@@ -284,7 +284,7 @@ exports.input_upload = function (req, res, next) {
             var returnData;
             if (resolve == 0) {
                 var returnImg = 'http://images.jjl.cn' + originPath;
-                if (fileType == 'upload') {
+                if (fileType == 'upload' || fileType == 'yimin_upload') {
                     returnData = {"errno":0,"data":[returnImg]};
                     res.end(JSON.stringify(returnData));
                     fs.unlinkSync(files[fileType][0].path);
