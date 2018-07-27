@@ -246,8 +246,11 @@ exports.input_upload = function (req, res, next) {
             var s = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
             var afterfix = f[type][0].headers['content-type'].split('/')[1];
             var remotePath = '';
-            if (type=='upload'|| type == 'weixincode' || type == 'qqcode') {
+            if (type=='upload' ) {
                 remotePath = "/ugc/" + Y +'/' + M + D + '/' + Y + M + D + h + m + s + (Math.round(Math.random()*899 + 100)) + '.' + afterfix;
+            }
+            else if (type == 'weixincode' || type == 'qqcode') {
+                remotePath = "/qr_code/" + Y +'/' + M + D + '/' + Y + M + D + h + m + s + (Math.round(Math.random()*899 + 100)) + '.' + afterfix;
             }
             else if (type == 'yimin_upload') {
                 remotePath = "/yimin_ugc/" + Y +'/' + M + D + '/' + Y + M + D + h + m + s + (Math.round(Math.random()*899 + 100)) + '.' + afterfix;
