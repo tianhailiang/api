@@ -4,6 +4,7 @@
       name      : "apisvr",
       script    : "./bin/apisvr",
       cwd: "./",           //根目录
+      instances: 2,
       watch:[
             "bin",
             "common",
