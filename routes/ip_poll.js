@@ -48,7 +48,7 @@ var city_list ={
 };
 var province_list = {
     "2": ["上海"],
-    "3": ["广州"],
+    "3": ["广东"],
     "4": ["天津"],
     "5": ["四川"],
     "7": ["重庆"],
@@ -104,7 +104,7 @@ function get_area_code(cityName){
 		}
 	}
 
-	return area_code ? area_code : 1;
+	return area_code;
 }
 
 module.exports =get_area_code;

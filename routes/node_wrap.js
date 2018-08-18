@@ -421,11 +421,13 @@ exports.get_ip_geter= function(req, res, next){
             request.get('http://api.map.baidu.com/location/ip?ip='+ip+'&ak=oTtUZr04m9vPgBZ1XOFzjmDpb7GCOhQw&coor=bd09ll',function (error, response, body){
                 var b =JSON.parse(body);
                 if(!error && response.statusCode == 200 && b.status == 0){
-                    if(b.content){
+                    if (b.content.address_detail.city) {
                         cityCode = get_area_code(b.content.address_detail.city);
-                        redis_db.set(ipKey, cityCode);
-                        redis_db.expire(ipKey, 86400);//存储24小时
                     }
+                    if (b.content.address_detail.province && cityCode == "") {
+                        cityCode = get_area_code(b.content.address_detail.province);
+                    }
+                    cityCode = cityCode ? cityCode : 1
                     res.send(cityCode);
                 }else{
                     log.error('ip_error',ip)
