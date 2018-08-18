@@ -11,6 +11,15 @@ var fs = require('fs');
 var multiparty = require('multiparty');
 var request = require('request');
 var get_area_code = require('./ip_poll');
+var config = require('../config/config');
+var redis = require('redis');
+var redis_db = require('redis-connection-pool')('ipCache', {
+    host: config.redisCache.host,
+    port: config.redisCache.port || 6379,
+    max_clients: config.redisCache.max || 30,
+    perform_checks: false,
+    database: 12 // database number to use
+  });
 // 在线评估
 exports.assessment = function (req, res, next) {
     data = req.query;
@@ -401,19 +410,30 @@ exports.get_ip_geter= function(req, res, next){
     if(ip.split(',').length>0){
         ip = ip.split(',')[0]
     }
-    // ip = '175.190.80.79'; //我的外网ip地址
-    log.info(ip)
-    request.get('http://api.map.baidu.com/location/ip?ip='+ip+'&ak=oTtUZr04m9vPgBZ1XOFzjmDpb7GCOhQw&coor=bd09ll',function (error, response, body){
-        if(!error && response.statusCode == 200){
-            log.info(body)
-            var b =JSON.parse(body);
-            var cityCode ='1';
-            if(b.content){
-                cityCode = get_area_code(b.content.address_detail.city);
-            }
-            res.send(cityCode);
+    // ip = '131.193.115.10'; //我的外网ip地址
+    // log.info(ip)
+    var ipKey = "ipKey_"+ip;
+    redis_db.get(ipKey, function (err, reply) {
+        if(reply){
+            res.send(reply);
         }else{
-            res.send(error);
+            var cityCode = '1';
+            request.get('http://api.map.baidu.com/location/ip?ip='+ip+'&ak=oTtUZr04m9vPgBZ1XOFzjmDpb7GCOhQw&coor=bd09ll',function (error, response, body){
+                var b =JSON.parse(body);
+                if(!error && response.statusCode == 200 && b.status == 0){
+                    if(b.content){
+                        cityCode = get_area_code(b.content.address_detail.city);
+                        redis_db.set(ipKey, cityCode);
+                        redis_db.expire(ipKey, 86400);//存储24小时
+                    }
+                    res.send(cityCode);
+                }else{
+                    log.error('ip_error',ip)
+                    redis_db.set(ipKey, cityCode);
+                    redis_db.expire(ipKey, 1800);//存储半小时
+                    res.send(cityCode);
+                }
+            })
         }
-    })
+    });
 };
