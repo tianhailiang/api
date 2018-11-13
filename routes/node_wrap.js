@@ -448,10 +448,12 @@ exports.dialing_log = function (req, res, next) {
   console.log(req.query.u_id)
   console.log(req.query.typeid)
 
-    data = req.query;
-    data.add_time = moment().format("YYYY-MM-DD HH:mm:ss")
-    cms.dialing_log(data, function(err, result){
+  data = req.query;
+  data.add_time = moment().format("YYYY-MM-DD HH:mm:ss")
+  cms.dialing_log(data, function(err, result){
+      log.debug(err, result)
     if(err){
+
       res.send(err);
     }else{
       res.send(result);

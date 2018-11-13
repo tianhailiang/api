@@ -1810,15 +1810,11 @@ exports.article_top = function(data,callback){
 
 //打电话日志
 exports.dialing_log = function(data, callback){
-  data = JSON.parse(data)
+  data = JSON.stringify(data)
   redis_db.select('0', function(error){
     var key = 'dialing_log';
     redis_db.lpush(key, data, function (err, req) {
-      if(req){
-        callback(null, req);
-      }else{
-        callback(null, '失败');
-      }
+      callback(null, req);
     });
   });
 };
