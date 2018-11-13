@@ -1814,7 +1814,11 @@ exports.dialing_log = function(data, callback){
   redis_db.select('0', function(error){
     var key = 'dialing_log';
     redis_db.lpush(key, data, function (err, req) {
-      callback(null, req);
+        if (err) {
+            callback(null, req);
+        } else {
+            callback(err, []);
+        }
     });
   });
 };
