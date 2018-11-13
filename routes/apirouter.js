@@ -4,19 +4,19 @@
 var node_wrap = require('./node_wrap.js');
 
 exports = module.exports = function (app) {// routes
-    /*�ӿڷ�װ* */
+    /* 接口代理封装 */
     app.get('/ucapi/ucapi_agent', node_wrap.ucapi_agent);
     app.get('/ucapi/ucapi_agent_post', node_wrap.ucapi_agent_post);
-    //��ע�û��ӿ�
+    //关注用户 接口
     app.post("/soapi/follow_people",node_wrap.follow_people);
-    //������ӿ�
+    //文章点击量
     //app.get('/cmsapi/article_count', node_wrap.article_count);
     //token
     app.get('/token', node_wrap.check_token);
     /*node�ӿڷ�װ*/
-    app.get('/cmsapi/assessment', node_wrap.assessment);//��������
-    app.post('/cmsapi/online_booking', node_wrap.online_booking);//��ѧ��ƷƵ��ҳ����ԤԼ
-    app.get('/cmsapi/onlineBooking', node_wrap.onlineBooking);//��ѧ����µ�ҳ����ԤԼ
+    app.get('/cmsapi/assessment', node_wrap.assessment);    //在线评估
+    app.post('/cmsapi/online_booking', node_wrap.online_booking);   //在线预约
+    app.get('/cmsapi/onlineBooking', node_wrap.onlineBooking);  //在线预约
     app.post('/cmsapi/passageway', node_wrap.passageway);//��ѧ��������ͨ��
     app.post('/cmsapi/zixunCount', node_wrap.zixunCount);//��ѧ������ѯ
     app.get('/cmsapi/sign_up_way', node_wrap.sign_up_way);//�������
@@ -38,5 +38,5 @@ exports = module.exports = function (app) {// routes
     //�����ö��ӿ�
     app.post('/article_top', node_wrap.article_top);
     app.get('/get_ip_geter',node_wrap.get_ip_geter);
-    app.get('/diaing_log',node_wrap.diaing_log)
+    app.get('/dialing_log',node_wrap.dialing_log)
 };
