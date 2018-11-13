@@ -444,9 +444,6 @@ exports.get_ip_geter= function(req, res, next){
 //打电话统计
 exports.dialing_log = function (req, res, next) {
   log.debug('打电话统计')
-  console.log(req.query.article_id)
-  console.log(req.query.u_id)
-  console.log(req.query.typeid)
 
   data = req.query;
   data.add_time = moment().format("YYYY-MM-DD HH:mm:ss")
