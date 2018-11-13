@@ -1815,9 +1815,11 @@ exports.dialing_log = function(data, callback){
     var key = 'dialing_log';
     redis_db.lpush(key, data, function (err, req) {
         if (err) {
-            callback(null, req);
-        } else {
             callback(err, []);
+        } else {
+            var resData = JSON.parse(req);
+            var res = {'code':0,'message':'success','data':resData};
+            callback(null, res);
         }
     });
   });
