@@ -1806,21 +1806,21 @@ exports.article_top = function(data,callback){
     return;
   }
   api.apiRequest_post(url ,data ,callback);
-};
+}
 
 //打电话日志
 exports.dialing_log = function(data, callback){
-  data = JSON.stringify(data)
+  var data = JSON.stringify(data)
   redis_db.select('0', function(error){
     var key = 'dialing_log';
     redis_db.lpush(key, data, function (err, req) {
-        if (err) {
-            callback(err, []);
-        } else {
-            var resData = JSON.parse(req);
-            var res = {'code':0,'message':'success','data':resData};
-            callback(null, res);
-        }
+      if (err) {
+        callback(err, []);
+      } else {
+        var resData = JSON.parse(req);
+        var res = {'code':0,'message':'success','data':resData};
+        callback(null, res);
+      }
     });
   });
-};
+}
