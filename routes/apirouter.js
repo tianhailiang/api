@@ -38,5 +38,4 @@ exports = module.exports = function (app) {// routes
     //�����ö��ӿ�
     app.post('/article_top', node_wrap.article_top);
     app.get('/get_ip_geter',node_wrap.get_ip_geter);
-    app.get('/diaing_log',node_wrap.diaing_log)
 };
