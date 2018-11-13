@@ -5,6 +5,7 @@ var cms = require('../model/cms');
 var log4js = require('../log/log');
 var log = log4js.getLogger();
 var comfunc = require('../common/common');
+var moment = require('moment');
 var tokenfunc = require('./token.js');
 var upyun = require('upyun');
 var fs = require('fs');
@@ -447,10 +448,9 @@ exports.dialing_log = function (req, res, next) {
   console.log(req.query.u_id)
   console.log(req.query.typeid)
 
-  data = req.body;
-  data.add_time = Date.parse(new Date())
-    log.debug(data)
-  cms.dialing_log(data, function(err, result){
+    data = req.query;
+    data.add_time = moment().format("YYYY-MM-DD HH:mm:ss")
+    cms.dialing_log(data, function(err, result){
     if(err){
       res.send(err);
     }else{

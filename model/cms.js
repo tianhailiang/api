@@ -1808,23 +1808,17 @@ exports.article_top = function(data,callback){
   api.apiRequest_post(url ,data ,callback);
 };
 
-//拨打电话日志
-var dialingRedisPool = require('redis-connection-pool')('dialing_log', {
-  host: config.redisCache.host,
-  port: config.redisCache.port || 6379,
-  max_clients: config.redisCache.max || 30,
-  perform_checks: false,
-  database: 0 // database number to use
-});
-
 //打电话日志
 exports.dialing_log = function(data, callback){
   data = JSON.parse(data)
-  dialingRedisPool.lpush('dialing_log', data, function (err, reply) {
-      if (reply) {
-          var resData = JSON.parse(reply);
-          var res = {'code': 0, 'message': 'success', 'data': resData};
-          callback(null, res);
+  redis_db.select('0', function(error){
+    var key = 'dialing_log';
+    redis_db.lpush(key, data, function (err, req) {
+      if(req){
+        callback(null, req);
+      }else{
+        callback(null, '失败');
       }
-  })
+    });
+  });
 };
