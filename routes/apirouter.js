@@ -38,4 +38,5 @@ exports = module.exports = function (app) {// routes
     //�����ö��ӿ�
     app.post('/article_top', node_wrap.article_top);
     app.get('/get_ip_geter',node_wrap.get_ip_geter);
+    app.get('/vote_list',node_wrap.vote_list);//文章底页点赞用户列表
 };
