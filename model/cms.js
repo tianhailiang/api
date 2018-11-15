@@ -1,8 +1,9 @@
 var api = require('../model/apiRequest');
 var config = require('../config/config');
 var log4js = require('../log/log');
-var redis = require('redis');
 var log = log4js.getLogger();
+var redis = require('redis');
+var redis_db =  redis.createClient(config.redisCache.port, config.redisCache.host);
 
 exports.city_list = function (callback) {
   var url = _api_url_path([], config.apis.get_city_list);
@@ -1616,10 +1617,9 @@ function update_viewnum(catid, id, uuid, callback){
     if(err){
       log.error("view num "+" : "+data.id, err);
     }else{
-      var redisHits =  redis.createClient(config.redisCache.port, config.redisCache.host);
-      redisHits.select('6', function(error){
-        var viewListKey = "view_set";
-        redisHits.sadd(viewListKey, id);
+      redis_db.select('6', function(error){
+      var viewListKey = "view_set";
+      redis_db.sadd(viewListKey, id);
       });
       if(callback){
         callback(null, {"uuid":uuid, "num":reply});
@@ -1806,4 +1806,21 @@ exports.article_top = function(data,callback){
     return;
   }
   api.apiRequest_post(url ,data ,callback);
-};
+}
+
+//打电话日志
+exports.dialing_log = function(data, callback){
+  var data = JSON.stringify(data)
+  redis_db.select('0', function(error){
+    var key = 'dialing_log';
+    redis_db.lpush(key, data, function (err, req) {
+      if (err) {
+        callback(err, []);
+      } else {
+        var resData = JSON.parse(req);
+        var res = {'code':0,'message':'success','data':resData};
+        callback(null, res);
+      }
+    });
+  });
+}
