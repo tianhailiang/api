@@ -11,6 +11,7 @@ const redisCache = {
 var prefix =  apiconfig.prefix;
 var uc_prefix = apiconfig.uc_prefix;
 var shequ_prefix = apiconfig.shequ_prefix;
+var so_prefix = apiconfig.so_prefix;
 var apis = {
   "oauth": uc_prefix + 'index.php',
   "bind_phone": uc_prefix + 'index.php?m=bind_phone',// 绑定手机号
@@ -298,7 +299,9 @@ var apis = {
   //根据ip 获取城市code码
   "get_ip_geter":prefix + 'ip_geter',
   //文章置顶
-  "article_top": shequ_prefix + 'article/article_top/'
+  "article_top": shequ_prefix + 'article/article_top/',
+  //文章底页获取点赞用户列表
+  "vote_list": so_prefix + 'article/vote_list'
 };
 module.exports = {
   redisCache: redisCache,

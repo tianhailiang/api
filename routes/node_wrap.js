@@ -453,4 +453,16 @@ exports.dialing_log = function (req, res, next) {
       res.send(result);
     }
   })
+};
+//文章底页获取点赞用户列表
+exports.vote_list = function (req, res, next) {
+    var data = req.query;
+    log.info('votes_list 参数', data);
+    cms.vote_list(data,function(err,result){
+        if(err){
+            res.send(err);
+        }else{
+            res.send(result);
+        }
+    })
 }

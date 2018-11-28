@@ -1824,3 +1824,12 @@ exports.dialing_log = function(data, callback){
     });
   });
 }
+//文章底页获取点赞用户列表
+exports.vote_list=function(data,callback){
+  var url = _api_url_path(data, config.apis.vote_list);
+  if (url == null){
+    callback('404');
+    return;
+  }
+  api.apiRequest(url, callback);
+};
