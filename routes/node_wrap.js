@@ -296,7 +296,7 @@ exports.input_upload = function (req, res, next) {
             console.log('resolve resolve',resolve);
             var returnData;
             if (resolve == 0) {
-                var returnImg = 'http://images.jjl.cn' + originPath;
+                var returnImg = '//images.jjl.cn' + originPath;
                 if (fileType == 'upload' || fileType == 'yimin_upload') {
                     returnData = {"errno":0,"data":[returnImg]};
                     res.end(JSON.stringify(returnData));
